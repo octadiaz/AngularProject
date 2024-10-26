@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { VentasService } from '../services/ventas.service';
 import { MesesService } from '../services/meses.service';
 import { AuthService } from '../services/auth.service';
@@ -18,7 +19,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private ventasService: VentasService, 
     private mesesService: MesesService, 
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,14 @@ export class DashboardComponent implements OnInit {
         console.error('Error al actualizar la venta', error);
       }
     );
+  }
+
+  cerrarSesion(): void {
+    // Limpiar cualquier dato almacenado en el localStorage
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
+    // Redirigir al componente de login
+    this.router.navigate(['/login']);
   }
 
   borrarSucursal(): void {

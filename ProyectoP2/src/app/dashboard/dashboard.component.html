@@ -1,35 +1,45 @@
-<div>
-  <h1>Ventas</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Mes</th>
-        <th *ngFor="let sucursal of sucursales">{{ sucursal }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let venta of ventas; let i = index">
-        <td>{{ meses[i]?.Mes }}</td>
-        <td *ngFor="let sucursal of sucursales">
-          <input
-            type="number"
-            [(ngModel)]="venta[sucursal]"
-            (change)="updateVenta(i)"
-            [disabled]="!isAdmin"
-          />
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<div class="bg-gray-100 min-h-screen flex flex-col items-center py-8">
+  <h1 class="text-3xl font-bold text-blue-500 mb-4">Ventas</h1>
+  <div class="flex flex-row items-start">
+    <table class="bg-white border-collapse border border-gray-300 text-center shadow-lg">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border border-gray-300 p-2">Mes</th>
+          <th *ngFor="let sucursal of sucursales" class="border border-gray-300 p-2">{{ sucursal }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let venta of ventas; let i = index">
+          <td class="border border-gray-300 p-2">{{ meses[i]?.Mes }}</td>
+          <td *ngFor="let sucursal of sucursales" class="border border-gray-300 p-2 hover:bg-gray-100">
+            <input
+              type="text"
+              [(ngModel)]="venta[sucursal]"
+              (change)="updateVenta(i)"
+              [disabled]="!isAdmin"
+              class="w-full text-center bg-gray-50"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="flex flex-col ml-8 space-y-2">
+      <button *ngIf="isAdmin" (click)="borrarSucursal()" class="bg-red-500 text-white px-4 py-2 rounded">
+        Borrar Sucursal
+      </button>
+      <button *ngIf="isAdmin" (click)="agregarSucursal()" class="bg-green-500 text-white px-4 py-2 rounded">
+        Agregar Sucursal
+      </button>
+    </div>
+  </div>
 
-<button *ngIf="isAdmin" (click)="borrarSucursal()">Borrar Sucursal</button>
-<button *ngIf="isAdmin" (click)="agregarSucursal()">Agregar Sucursal</button>
+  <div class="flex space-x-4 mt-4">
+    <a routerLink="/barra" class="text-blue-500 underline">Gráfico Barra</a>
+    <a routerLink="/area" class="text-blue-500 underline">Gráfico Línea</a>
+    <a routerLink="/barraApi" class="text-blue-500 underline">Gráfico Barras Apiladas</a>
+  </div>
 
-<div>
-  <a routerLink="/barra">Gráfico Barra</a>
-  <hr>
-  <a routerLink="/area">Gráfico Línea</a>
-  <hr>
-  <a routerLink="/barraApi">Gráfico Barras Apiladas</a>
+  <button (click)="cerrarSesion()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">
+    Cerrar Sesión
+  </button>
 </div>
