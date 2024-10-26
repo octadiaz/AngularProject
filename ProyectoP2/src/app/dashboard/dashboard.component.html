@@ -3,21 +3,33 @@
   <table>
     <thead>
       <tr>
-        <th>Suc1</th>
-        <th>Suc2</th>
-        <th>Suc3</th>
-        <th>Suc4</th>
-        <th>Suc5</th>
+        <th>Mes</th>
+        <th *ngFor="let sucursal of sucursales">{{ sucursal }}</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let venta of ventas">
-        <td>{{ venta.Suc1 }}</td>
-        <td>{{ venta.Suc2 }}</td>
-        <td>{{ venta.Suc3 }}</td>
-        <td>{{ venta.Suc4 }}</td>
-        <td>{{ venta.Suc5 }}</td>
+      <tr *ngFor="let venta of ventas; let i = index">
+        <td>{{ meses[i]?.Mes }}</td>
+        <td *ngFor="let sucursal of sucursales">
+          <input
+            type="number"
+            [(ngModel)]="venta[sucursal]"
+            (change)="updateVenta(i)"
+            [disabled]="!isAdmin"
+          />
+        </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<button *ngIf="isAdmin" (click)="borrarSucursal()">Borrar Sucursal</button>
+<button *ngIf="isAdmin" (click)="agregarSucursal()">Agregar Sucursal</button>
+
+<div>
+  <a routerLink="/barra">Gráfico Barra</a>
+  <hr>
+  <a routerLink="/area">Gráfico Línea</a>
+  <hr>
+  <a routerLink="/barraApi">Gráfico Barras Apiladas</a>
 </div>

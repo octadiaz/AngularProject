@@ -1,7 +1,7 @@
 <?php
 include_once 'database.php';
 
-// Configuración de CORS - siempre enviar estos encabezados
+// Configuración de CORS
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
@@ -9,7 +9,6 @@ header("Access-Control-Allow-Credentials: true");
 
 // Manejar la solicitud OPTIONS para las preflight requests
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    // Responder con los encabezados CORS y un código 200 (OK)
     http_response_code(200);
     exit();
 }
@@ -37,11 +36,15 @@ if ($conn) {
             if ($stmt->rowCount() > 0) {
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                // Verificar la contraseña (deberías usar hash, aquí solo es un ejemplo)
-                if (password_verify($password, $user['Password'])) {
-                    // Login exitoso
+                // Verificar la contraseña hasheada usando SHA-256
+                if (hash_equals($user['Password'], hash('sha256', $password))) {
+                    // Login exitoso, incluir el rol en la respuesta
                     header('Content-Type: application/json');
-                    echo json_encode(["status" => true, "message" => "Login exitoso"]);
+                    echo json_encode([
+                        "status" => true, 
+                        "message" => "Login exitoso",
+                        "rol" => $user['Rol'] // Incluir el rol del usuario en la respuesta
+                    ]);
                 } else {
                     // Contraseña incorrecta
                     header('Content-Type: application/json');
