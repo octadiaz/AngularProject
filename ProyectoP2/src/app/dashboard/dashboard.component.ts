@@ -17,8 +17,8 @@ export class DashboardComponent implements OnInit {
   isAdmin: boolean = false;
 
   constructor(
-    private ventasService: VentasService, 
-    private mesesService: MesesService, 
+    private ventasService: VentasService,
+    private mesesService: MesesService,
     private authService: AuthService,
     private router: Router
   ) {}
@@ -75,5 +75,15 @@ export class DashboardComponent implements OnInit {
         this.sucursales.push(sucursalRestaurada);
       }
     }
+  }
+
+  // Función para formatear los nombres de sucursales
+  formatSucursalName(sucursal: string): string {
+    const replacements: { [key: string]: string } = {
+      'SantaFe': 'Santa Fe',
+      'SantoTome': 'Santo Tomé',
+      'Parana': 'Paraná'
+    };
+    return replacements[sucursal] || sucursal;
   }
 }

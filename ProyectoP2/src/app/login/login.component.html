@@ -1,6 +1,6 @@
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
   <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-    <h2 class="text-2xl font-bold mb-6 text-center text-blue-500">Iniciar Sesión</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center text-emerald-500">Iniciar Sesión</h2>
     <form (ngSubmit)="login()" class="space-y-4">
       <div class="form-group">
         <label for="usuario" class="block text-sm font-medium text-gray-700">Usuario</label>
@@ -10,7 +10,8 @@
           [(ngModel)]="usuario"
           name="usuario"
           required
-          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          [ngClass]="{'border-red-500': isUserError}"
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
         />
       </div>
 
@@ -22,16 +23,20 @@
           [(ngModel)]="password"
           name="password"
           required
-          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          [ngClass]="{'border-red-500': isPasswordError}"
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
         />
       </div>
 
       <button
         type="submit"
-        class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        class="w-full bg-emerald-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-400"
       >
         Iniciar Sesión
       </button>
+
+      <!-- Mensaje de error general -->
+      <p *ngIf="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</p>
     </form>
   </div>
 </div>

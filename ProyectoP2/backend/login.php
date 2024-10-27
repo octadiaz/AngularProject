@@ -41,24 +41,24 @@ if ($conn) {
                     // Login exitoso, incluir el rol en la respuesta
                     header('Content-Type: application/json');
                     echo json_encode([
-                        "status" => true, 
+                        "status" => true,
                         "message" => "Login exitoso",
-                        "rol" => $user['Rol'] // Incluir el rol del usuario en la respuesta
+                        "rol" => $user['Rol']
                     ]);
                 } else {
                     // Contraseña incorrecta
                     header('Content-Type: application/json');
-                    echo json_encode(["status" => false, "message" => "Contraseña incorrecta"]);
+                    echo json_encode(["status" => false, "errorType" => "password", "message" => "Contraseña incorrecta"]);
                 }
             } else {
                 // Usuario no encontrado
                 header('Content-Type: application/json');
-                echo json_encode(["status" => false, "message" => "Usuario no encontrado"]);
+                echo json_encode(["status" => false, "errorType" => "user", "message" => "Usuario no encontrado"]);
             }
         } else {
             // Campos obligatorios faltantes
             header('Content-Type: application/json');
-            echo json_encode(["status" => false, "message" => "Faltan campos obligatorios"]);
+            echo json_encode(["status" => false, "errorType" => "fields", "message" => "Faltan campos obligatorios"]);
         }
     } catch (PDOException $exception) {
         // Devolver un mensaje de error si ocurre un problema
