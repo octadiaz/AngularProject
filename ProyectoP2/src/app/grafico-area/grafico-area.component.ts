@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart, ChartType } from 'chart.js/auto';
+import { Chart, ChartType, Legend } from 'chart.js/auto';
 import { MesesService } from '../services/meses.service';
 import { VentasService } from '../services/ventas.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-grafico-area',
@@ -9,20 +10,21 @@ import { VentasService } from '../services/ventas.service';
   styleUrl: './grafico-area.component.css'
 })
 export class GraficoAreaComponent implements OnInit {
-// Atributo que almacena los datos del chart
 public chart: any;
+isAdmin: boolean = false;
 
-constructor(private mesesService: MesesService, private ventasService: VentasService) {}
+constructor(private mesesService: MesesService, 
+  private ventasService: VentasService,
+  private authService: AuthService
+) {}
 
 ngOnInit(): void {
-  // Llamadas a los servicios para obtener los meses y las ventas
+  this.isAdmin = this.authService.isAdmin();
+
   this.mesesService.getMeses().subscribe(meses => {
-    console.log('Meses:', meses);
-    const labels = meses.map((mes: any) => mes.Mes); // Extrae los nombres de los meses
+    const labels = meses.map((mes: any) => mes.Mes);
 
     this.ventasService.getVentas().subscribe(ventas => {
-      console.log('Ventas:', ventas);
-      // Prepara los datasets basados en las ventas de cada sucursal
       const datasets = [
         {
           label: 'Santa Fe',
@@ -61,22 +63,30 @@ ngOnInit(): void {
         }
       ];
 
-      // Configura los datos para el gráfico
       const data = {
-        labels: labels, // Los nombres de los meses
-        datasets: datasets // Los datasets de las ventas por sucursal
+        labels: labels, 
+        datasets: datasets 
       };
 
-      // Crea el gráfico
+      
       this.chart = new Chart("chart", {
-        type: 'line' as ChartType, // tipo de la gráfica 
-        data: data, // datos 
-        options: { // opciones de la gráfica 
+        type: 'line' as ChartType,
+        data: data, 
+        options: { 
           scales: {
             y: {
               beginAtZero: true
             }
           },
+          plugins: {
+            legend: {
+              onClick: (e,legendItem, legend) => {
+                if (this.isAdmin) {
+                  Chart.defaults.plugins.legend.onClick.call(legend, e, legendItem, legend);
+                }
+              }
+            }
+          }
         },
       });
     });

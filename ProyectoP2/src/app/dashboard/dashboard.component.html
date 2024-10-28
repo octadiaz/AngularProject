@@ -1,56 +1,61 @@
-<div class="bg-gray-100 min-h-screen flex flex-col items-center py-8">
-  <h1 class="text-3xl font-bold text-emerald-700 mb-4">Ventas por Sucursal</h1>
-  <div class="flex flex-row items-start">
-    <table class="bg-white border-collapse border border-gray-300 text-center shadow-lg">
-      <thead>
-        <tr class="bg-gray-200">
-          <th class="border border-gray-300 p-2 bg-emerald-500 text-white">Mes</th>
-          <th *ngFor="let sucursal of sucursales" class="border border-gray-300 p-2 bg-emerald-700 text-white">
-            {{ formatSucursalName(sucursal) }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let venta of ventas; let i = index">
-          <td class="border border-gray-300 p-2 bg-emerald-700 text-white">{{ meses[i]?.Mes }}</td>
-          <td *ngFor="let sucursal of sucursales" class="border border-gray-300 p-2 hover:bg-gray-50 ">
-            <input
-              type="text"
-              [(ngModel)]="venta[sucursal]"
-              (change)="updateVenta(i)"
-              [disabled]="!isAdmin"
-              class="w-full text-center"
-            />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="flex flex-col ml-8 space-y-2">
-      <button *ngIf="isAdmin" (click)="borrarSucursal()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 duration-150">
-        Borrar Sucursal
-      </button>
-      <button *ngIf="isAdmin" (click)="agregarSucursal()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 duration-150">
-        Agregar Sucursal
-      </button>
+<div class="bg-gray-100 min-h-screen py-8">
+  <h1 class="text-4xl font-bold text-emerald-600 text-center mb-6">
+    Bienvenidos a AFK S.A
+  </h1>
+
+  <!-- Sección de tarjetas de KPIs -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 px-8 mb-8">
+    <div class="bg-white p-4 rounded shadow-md">
+      <h2 class="text-xl font-bold text-gray-800">
+        Total de articulos a la venta
+      </h2>
+      <p class="text-2xl font-semibold text-emerald-600">6</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow-md">
+      <h2 class="text-xl font-bold text-gray-800">Clientes Registrados</h2>
+      <p class="text-2xl font-semibold text-emerald-600">12</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow-md">
+      <h2 class="text-xl font-bold text-gray-800">Sucursales Activas</h2>
+      <p class="text-2xl font-semibold text-emerald-600">5</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow-md">
+      <h2 class="text-xl font-bold text-gray-800">Crecimiento Mensual</h2>
+      <p class="text-2xl font-semibold text-emerald-600">+15%</p>
     </div>
   </div>
 
-  <div class="flex space-x-4 mt-4">
-    <a routerLink="/barra" class="text-emerald-950 font-bold uppercase flex flex-row gap-1 transition ease-in-out delay-100 hover:scale-105">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-column-big"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><rect x="15" y="5" width="4" height="12" rx="1"/><rect x="7" y="8" width="4" height="9" rx="1"/></svg>
-      Gráfico Barra
-    </a>
-    <a routerLink="/area" class="text-emerald-950 font-bold uppercase flex flex-row gap-1 transition ease-in-out delay-100 hover:scale-105">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-spline"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16c.5-2 1.5-7 4-7 2 0 2 3 4 3 2.5 0 4.5-5 5-7"/></svg>
-      Gráfico Línea
-    </a>
-    <a routerLink="/barraApi" class="text-emerald-950 font-bold uppercase flex flex-row gap-1 transition ease-in-out delay-100 hover:scale-105">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-column-stacked"><path d="M11 13H7"/><path d="M19 9h-4"/><path d="M3 3v16a2 2 0 0 0 2 2h16"/><rect x="15" y="5" width="4" height="12" rx="1"/><rect x="7" y="8" width="4" height="9" rx="1"/></svg>
-      Gráfico Barras Apiladas
-    </a>
+  <!-- Sección de novedades y tareas pendientes -->
+  <div class="mt-10 px-8">
+    <h2 class="text-2xl font-bold text-emerald-600 mb-4">Novedades</h2>
+    <div class="bg-white p-6 rounded shadow-md">
+      <ul class="list-disc list-inside text-gray-700">
+        <li>
+          <strong>Apertura de Nueva Sucursal:</strong> Estamos emocionados de
+          anunciar la apertura de nuestra nueva sucursal en la ciudad de
+          Córdoba. ¡Esperamos su visita!
+        </li>
+        <li class="mt-2">
+          <strong>Promociones Especiales de Octubre:</strong> No te pierdas
+          nuestras promociones especiales en productos seleccionados. ¡Visita
+          nuestras sucursales para obtener más información!
+        </li>
+        <li class="mt-2">
+          <strong>Nueva Alianza Comercial:</strong> AFK S.A ha firmado un
+          acuerdo estratégico con ProLogistics para optimizar la cadena de
+          suministros y mejorar la eficiencia en la distribución de productos.
+        </li>
+        <li class="mt-2">
+          <strong>Capacitación para el Personal:</strong> Se llevará a cabo una
+          capacitación en ventas y atención al cliente el próximo miércoles.
+          Todos los empleados deben inscribirse antes del viernes.
+        </li>
+        <li class="mt-2">
+          <strong>Evento Anual de Clientes:</strong> Invitamos a todos nuestros
+          clientes VIP al evento anual que se realizará en el Hotel Central el
+          próximo 20 de noviembre. ¡No te lo pierdas!
+        </li>
+      </ul>
+    </div>
   </div>
-
-  <button (click)="cerrarSesion()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 duration-300">
-    Cerrar Sesión
-  </button>
 </div>

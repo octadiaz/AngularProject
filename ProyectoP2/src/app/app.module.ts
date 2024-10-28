@@ -11,6 +11,10 @@ import { GraficoBarraComponent } from './grafico-barra/grafico-barra.component';
 import { GraficoAreaComponent } from './grafico-area/grafico-area.component';
 import { GraficoBarraApiladaComponent } from './grafico-barra-apilada/grafico-barra-apilada.component';
 import { LoadingComponent } from './loading/loading.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { VentaComponent } from './venta/venta.component';
+import { GraficosComponent } from './graficos/graficos.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,10 @@ import { LoadingComponent } from './loading/loading.component';
     GraficoAreaComponent,
     GraficoBarraApiladaComponent,
     LoadingComponent,
+    NavbarComponent,
+    ClienteComponent,
+    VentaComponent,
+    GraficosComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,62 @@
+<nav class="bg-emerald-700 p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <!-- Logo -->
+    <a class="text-white text-xl font-bold" routerLink="/">AFK S.A</a>
+
+    <!-- Contenedor del menú de navegación -->
+    <div class="flex-grow flex justify-center">
+      <ul class="flex space-x-4 items-center">
+        <li>
+          <a
+            class="text-white hover:text-emerald-400"
+            routerLink="/dashboard"
+            routerLinkActive="text-emerald-300"
+            >Inicio</a
+          >
+        </li>
+        <li>
+          <a
+            class="text-white hover:text-emerald-400"
+            routerLink="/sucursales"
+            routerLinkActive="text-emerald-300"
+            >Sucursales</a
+          >
+        </li>
+        <li>
+          <a
+            class="text-white hover:text-emerald-400"
+            routerLink="/clientes"
+            routerLinkActive="text-emerald-300"
+            >Clientes</a
+          >
+        </li>
+        <li>
+          <a
+            class="text-white hover:text-emerald-400"
+            routerLink="/ventas"
+            routerLinkActive="text-emerald-300"
+            >Ventas</a
+          >
+        </li>
+        <li>
+          <a
+            class="text-white hover:text-emerald-400"
+            routerLink="/graficos"
+            routerLinkActive="text-emerald-300"
+            >Gráficos</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Botón de cerrar sesión -->
+    <div class="ml-auto">
+      <button
+        (click)="cerrarSesion()"
+        class="bg-emerald-900 text-white px-4 py-2 rounded hover:bg-emerald-800 transition duration-300"
+      >
+        Cerrar Sesión
+      </button>
+    </div>
+  </div>
+</nav>

@@ -3,19 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 // Importa el componente DashboardComponent si ya lo tienes creado
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { GraficoBarraComponent } from './grafico-barra/grafico-barra.component';
-import { GraficoAreaComponent } from './grafico-area/grafico-area.component';
-import { GraficoBarraApiladaComponent } from './grafico-barra-apilada/grafico-barra-apilada.component';
 import { LoadingComponent } from './loading/loading.component';
+import { SucursalComponent } from './sucursal/sucursal.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { VentaComponent } from './venta/venta.component';
+import { GraficosComponent } from './graficos/graficos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // Redirigir al dashboard por defecto
   { path: 'login', component: LoginComponent },
   { path: 'loading', component: LoadingComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'barra', component: GraficoBarraComponent },
-  { path: 'barraApi', component: GraficoBarraApiladaComponent },
-  { path: 'area', component: GraficoAreaComponent }
+  { path: 'sucursales', component: SucursalComponent },
+  { path: 'clientes', component: ClienteComponent },
+  { path: 'ventas', component: VentaComponent },
+  { path: 'graficos', component: GraficosComponent },
 ];
 
 
