@@ -6,9 +6,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://integrador-programacion2.vercel.app/backend/login.php';
-
-  private apiUrl1 = '/backend/login.php';
+  private apiUrl = '/backend/login.php';
   private userRole: string | null = null;
 
   constructor(private http: HttpClient) {}
