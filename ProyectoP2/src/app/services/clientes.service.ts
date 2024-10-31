@@ -6,9 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ClientesService {
-  private apiUrl = 'https://integrador-programacion2.vercel.app/backend/getClientes.php';
-
-  private apiUrl1 = 'http://localhost:5000/backend/getClientes.php'; // Cambia esta URL según sea necesario
+  private apiUrl = 'http://localhost:5000/backend/getClientes.php'; // Cambia esta URL según sea necesario
 
   constructor(private http: HttpClient) {}
 

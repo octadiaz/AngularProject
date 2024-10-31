@@ -6,9 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class VentasService {
-  private apiUrl = 'https://integrador-programacion2.vercel.app/backend';
-
-  private apiUrl1 = '/backend'; // URL base de tu API
+  private apiUrl = '/backend'; // URL base de tu API
 
   constructor(private http: HttpClient) {}
 

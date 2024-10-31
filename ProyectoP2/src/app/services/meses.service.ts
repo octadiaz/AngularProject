@@ -6,9 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MesesService {
-  private apiUrl = 'https://integrador-programacion2.vercel.app/backend/getMeses.php';
-
-  private apiUrl1 = '/backend/getMeses.php'; // URL del archivo PHP que obtiene los meses
+  private apiUrl = '/backend/getMeses.php'; // URL del archivo PHP que obtiene los meses
 
   constructor(private http: HttpClient) {}
 
