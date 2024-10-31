@@ -1,0 +1,121 @@
+<div class="bg-gray-100 min-h-screen flex flex-col items-center py-8">
+  <h1 class="text-3xl font-bold text-emerald-700 mb-4">Gráficos de Ventas</h1>
+
+  <!-- Botones de selección de gráficos -->
+  <div class="flex justify-center space-x-8 mt-4">
+    <button
+      (click)="mostrarGrafico('barra')"
+      class="text-emerald-950 font-bold uppercase flex flex-row gap-1 transition ease-in-out delay-100 hover:scale-105"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-chart-column-big"
+      >
+        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+        <rect x="15" y="5" width="4" height="12" rx="1" />
+        <rect x="7" y="8" width="4" height="9" rx="1" />
+      </svg>
+      Gráfico Barra
+    </button>
+
+    <button
+      (click)="mostrarGrafico('area')"
+      class="text-emerald-950 font-bold uppercase flex flex-row gap-1 transition ease-in-out delay-100 hover:scale-105"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-chart-spline"
+      >
+        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+        <path d="M7 16c.5-2 1.5-7 4-7 2 0 2 3 4 3 2.5 0 4.5-5 5-7" />
+      </svg>
+      Gráfico Línea
+    </button>
+
+    <button
+      (click)="mostrarGrafico('barraApi')"
+      class="text-emerald-950 font-bold uppercase flex flex-row gap-1 transition ease-in-out delay-100 hover:scale-105"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-chart-column-stacked"
+      >
+        <path d="M11 13H7" />
+        <path d="M19 9h-4" />
+        <path d="M3 3v16a2 2 0 0 0 2 2h16" />
+        <rect x="15" y="5" width="4" height="12" rx="1" />
+        <rect x="7" y="8" width="4" height="9" rx="1" />
+      </svg>
+      Gráfico Barras Apiladas
+    </button>
+  </div>
+
+  <!-- Contenedor para gráficos y tabla en paralelo -->
+  <div class="flex justify-between items-start mt-8 w-full px-8 space-x-8">
+    <!-- Contenedor para los gráficos -->
+    <div class="flex-grow">
+      <app-grafico-barra *ngIf="tipoGrafico === 'barra'"></app-grafico-barra>
+      <app-grafico-area *ngIf="tipoGrafico === 'area'"></app-grafico-area>
+      <app-grafico-barra-apilada
+        *ngIf="tipoGrafico === 'barraApi'"
+      ></app-grafico-barra-apilada>
+    </div>
+
+    <div class="w-1/3">
+      <table
+        class="bg-white border-collapse border border-gray-300 text-center shadow-lg w-full"
+      >
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-300 p-2 bg-emerald-500 text-white">
+              Mes
+            </th>
+            <th
+              *ngFor="let sucursal of sucursales"
+              class="border border-gray-300 p-2 bg-emerald-700 text-white"
+            >
+              {{ formatSucursalName(sucursal) }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let venta of ventas; let i = index">
+            <td class="border border-gray-300 p-2 bg-emerald-700 text-white">
+              {{ meses[i]?.Mes }}
+            </td>
+            <td
+              *ngFor="let sucursal of sucursales"
+              class="border border-gray-300 p-2 hover:bg-gray-50"
+            >
+              {{ venta[sucursal] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

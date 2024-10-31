@@ -1,0 +1,20 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="container mx-auto">
+    <h2 class="text-2xl font-bold text-center text-emerald-600 mb-6">
+      Lista de Sucursales
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <div
+        *ngFor="let sucursal of sucursales"
+        class="bg-white p-4 rounded-lg shadow-md flex flex-col items-center justify-center text-center"
+      >
+        <p class="text-lg font-medium text-gray-700">
+          {{ sucursal.Nombre_Suc }}
+        </p>
+        <p class="text-sm text-gray-500">
+          {{ sucursal.Dir_Suc }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
