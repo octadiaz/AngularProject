@@ -2,3 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Hace que el contenedor ocupe el alto completo de la pantalla */
+  }
+  
+  .flex-grow {
+    flex-grow: 1; /* Permite que el contenido principal ocupe el espacio restante */
+  }
+  
+  .footer {
+    display: block;
+    background-color: #064e3b; /* Color de fondo para el footer */
+    text-align: center;
+    padding: 1rem;
+  }
+  

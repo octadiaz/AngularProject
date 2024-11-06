@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SucursalesService {
-  private apiUrl = 'http://localhost:5000/backend/getSucursales.php'; // Cambia esta URL según sea necesario
+  private apiUrl = 'http://localhost:5000/backend/getSucursales.php';
 
   constructor(private http: HttpClient) {}
 

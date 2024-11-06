@@ -1,0 +1,13 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="container mx-auto">
+    <h1 class="text-2xl font-bold text-center text-emerald-600 mb-6">Lista de Artículos</h1>
+    <div class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-3 gap-4">
+      <div
+        *ngFor="let articulo of articulos"
+        class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center text-center"
+      >
+        <p class="text-lg font-medium text-gray-700">{{ articulo.Descripcion }} ${{articulo.Precio}}</p>
+      </div>
+    </div>
+  </div>
+</div>
