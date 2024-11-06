@@ -15,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { VentaComponent } from './venta/venta.component';
 import { GraficosComponent } from './graficos/graficos.component';
+import { ArticulosComponent } from './articulos/articulos.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { GraficosComponent } from './graficos/graficos.component';
     ClienteComponent,
     VentaComponent,
     GraficosComponent,
+    ArticulosComponent,
   ],
   imports: [
     BrowserModule,
