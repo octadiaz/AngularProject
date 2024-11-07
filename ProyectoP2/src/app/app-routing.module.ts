@@ -10,7 +10,7 @@ import { GraficosComponent } from './graficos/graficos.component';
 import { ArticulosComponent } from './articulos/articulos.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '' , redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'loading', component: LoadingComponent },
   { path: 'dashboard', component: DashboardComponent },
