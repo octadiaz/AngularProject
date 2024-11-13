@@ -1,12 +1,65 @@
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
   <div class="container mx-auto">
     <h1 class="text-2xl font-bold text-center text-emerald-600 mb-6">Lista de Artículos</h1>
+    
+    <!-- Botón para abrir el formulario de agregar artículo -->
+    <div class="flex justify-end mb-4">
+      <button 
+      *ngIf="isAdmin"
+        (click)="toggleFormularioAgregar()"
+        [ngClass]="{'bg-emerald-500': !mostrarFormulario, 'bg-red-500': mostrarFormulario}"
+        class="text-white px-4 py-2 rounded hover:shadow-md transition duration-300"
+      >
+        {{ mostrarFormulario ? 'Salir' : 'Agregar Artículo' }}
+      </button>
+    </div>
+
+    <!-- Formulario de agregar artículo -->
+    <div *ngIf="mostrarFormulario" class="bg-white p-4 rounded-lg shadow-md mb-4">
+      <h2 class="text-xl font-bold mb-2">Nuevo Artículo</h2>
+      <form (submit)="agregarArticulo()">
+        <div class="mb-2">
+          <label for="descripcion" class="block text-gray-700">Descripción:</label>
+          <input 
+            id="descripcion" 
+            [(ngModel)]="nuevoArticulo.descripcion" 
+            name="descripcion"
+            class="w-full p-2 border rounded" 
+            required 
+          />
+        </div>
+        <div class="mb-2">
+          <label for="precio" class="block text-gray-700">Precio:</label>
+          <input 
+            id="precio" 
+            [(ngModel)]="nuevoArticulo.precio" 
+            name="precio"
+            type="number" 
+            (keypress)="preventNegative($event)"
+            (input)="validatePrecio()"
+            class="w-full p-2 border rounded" 
+            required 
+          />
+          <p *ngIf="precioError" class="text-red-500 text-sm mt-1">El precio no puede ser negativo.</p>
+        </div>
+        <button 
+          type="submit" 
+          [disabled]="precioError"
+          class="bg-emerald-500 text-white px-4 py-2 rounded hover:bg-emerald-600 transition duration-300"
+        >
+          Guardar
+        </button>
+      </form>
+    </div>
+    
+
+    <!-- Lista de artículos en tarjetas -->
     <div class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-3 gap-4">
       <div
         *ngFor="let articulo of articulos"
         class="bg-white p-4 rounded-lg shadow-md flex items-center justify-center text-center"
       >
-        <p class="text-lg font-medium text-gray-700">{{ articulo.Descripcion }} ${{articulo.Precio}}</p>
+        <p class="text-lg font-medium text-gray-700">{{ articulo.Descripcion }} ${{ articulo.Precio }}</p>
       </div>
     </div>
   </div>

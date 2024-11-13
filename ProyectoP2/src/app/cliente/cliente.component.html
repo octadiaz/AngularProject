@@ -1,5 +1,6 @@
-<div class="flex items-center justify-center min-h-screen bg-gray-100">
-  <div class="flex flex-col mb-4">
+<div class="min-h-screen bg-gray-100 pt-4">
+  <!-- Contenedor del botón en la esquina superior derecha -->
+  <div class="flex justify-end pr-6">
     <button 
       (click)="toggleView()" 
       class="bg-emerald-500 text-white px-4 py-2 rounded hover:bg-emerald-600 transition duration-300"
@@ -7,7 +8,8 @@
       {{ isCardView ? 'Ver en Lista' : 'Ver en Tarjeta' }}
     </button>
   </div>
-  <div class="container mx-auto">
+  
+  <div class="container mx-auto mt-4">
     <h2 class="text-2xl font-bold text-center text-emerald-600 mb-6">
       Lista de Clientes
     </h2>
@@ -24,15 +26,33 @@
       </div>
     </div>
 
-    <!-- Vista en Lista -->
+    <!-- Vista en Lista con paginación -->
     <div *ngIf="!isCardView" class="flex flex-col space-y-2">
       <div 
-        *ngFor="let cliente of clientes" 
+        *ngFor="let cliente of paginatedClientes()" 
         class="bg-white p-4 rounded-lg shadow-md flex items-center justify-start"
       >
         <p class="text-lg font-medium text-gray-700">
           {{ cliente.Nombre }} {{ cliente.Apellido }}
         </p>
+      </div>
+      
+      <!-- Controles de paginación -->
+      <div class="flex justify-center mt-4 space-x-2">
+        <button 
+          (click)="prevPage()" 
+          [disabled]="currentPage === 1" 
+          class="bg-emerald-500 text-white px-4 py-2 rounded hover:bg-emerald-600 disabled:bg-gray-200"
+        >
+          Anterior
+        </button>
+        <button 
+          (click)="nextPage()" 
+          [disabled]="currentPage === totalPages" 
+          class="bg-emerald-500 text-white px-4 py-2 rounded hover:bg-emerald-600 disabled:bg-gray-200"
+        >
+          Siguiente
+        </button>
       </div>
     </div>
   </div>
